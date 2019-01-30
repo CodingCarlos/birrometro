@@ -9,9 +9,14 @@
 
      <v-content class="text-xs-center">
       <h1 class="my-4">{{ liters }} L</h1>
-      <v-btn @click="increase(0.20)">Caña</v-btn>
-      <v-btn @click="increase(0.33)">Tercio</v-btn>
-      <v-btn @click="increase(1)">Litro</v-btn>
+      <div>
+        <v-btn @click="increase(0.20)">Caña</v-btn>
+        <v-btn @click="increase(0.33)">Tercio</v-btn>
+        <v-btn @click="increase(1)">Litro</v-btn>
+      </div>
+      <div class="py-4">
+        <v-btn color="error" @click="reset()">Reset</v-btn>
+      </div>
     </v-content>
   </div>
 </template>
@@ -27,6 +32,13 @@ export default {
   methods: {
     increase(quantity) {
       this.$store.dispatch('addQuantity', quantity);
+    },
+    reset() {
+      /* ToDo @CodingCarlos: Use vuetify confirm instead of native one */
+      /* eslint-disable-next-line */
+      if (confirm('¡Ojo! Se va a resetear el contador para siempre. ¿Estás seguro?')) {
+        this.$store.dispatch('reset');
+      }
     },
   },
 };
